@@ -1,5 +1,6 @@
 class BrakeBanner {
 	constructor(selector) {
+		// 初始化画布
 		this.app = new PIXI.Application({
 			width: window.innerWidth,
 			height: window.innerHeight,
