@@ -32,7 +32,7 @@ class BrakeBanner {
 		const bikeContainer = new PIXI.Container();
 		this.stage.addChild(bikeContainer);
 
-		bikeContainer.scale.x = bikeContainer.scale.y = 0.3
+		bikeContainer.scale.x = bikeContainer.scale.y = 0.2
 
 		const brakeBikeImage = new PIXI.Sprite(this.loader.resources['brake_bike.png'].texture);
 		const brakeLeverImage = new PIXI.Sprite(this.loader.resources['brake_lever.png'].texture);
@@ -62,6 +62,13 @@ class BrakeBanner {
 		actionButton.on("mouseup", () => {
 			gsap.to(brakeLeverImage, { duration: .6, rotation: 0 })
 		})
+
+		let resize = () => {
+			bikeContainer.x = window.innerWidth - bikeContainer.width
+			bikeContainer.y = window.innerHeight - bikeContainer.height
+		}
+		window.addEventListener('resize', resize)
+		resize()
 
 	}
 	createActionButton() {
