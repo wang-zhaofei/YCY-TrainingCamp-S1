@@ -56,9 +56,11 @@ class BrakeBanner {
 		actionButton.on("mousedown", () => {
 			// brakeLeverImage.rotation = Math.PI / 180 * -30
 			gsap.to(brakeLeverImage, { duration: .8, rotation: Math.PI / 180 * -30 })
+			pause()
 		})
 		actionButton.on("mouseup", () => {
 			gsap.to(brakeLeverImage, { duration: .6, rotation: 0 })
+			start()
 		})
 
 		let resize = () => {
@@ -77,11 +79,11 @@ class BrakeBanner {
 		particlesContainer.x = window.innerWidth / 2
 		particlesContainer.y = window.innerHeight / 2
 
-		particlesContainer.rotation = 38 * Math.PI / 180
+		particlesContainer.rotation = 35 * Math.PI / 180
 
 		// 创建粒子
 		let particles = []
-		let colors = [0xf1cf54, 0xb5cea8] // 多颜色
+		let colors = [0xf1cf54, 0xb5cea8, 0xf1cf54, 0x818181, 0x000000]; // 多颜色
 
 		for (let i = 0; i < 10; i++) {
 			let gr = new PIXI.Graphics();
@@ -104,17 +106,20 @@ class BrakeBanner {
 
 		}
 
-		let speed = 10
+		let speed = 0
 		function loop() {
 
 			speed += .5
-			speed = Math.min(speed, 30)
+			speed = Math.min(speed, 20)
 
 			for (let i = 0; particles.length; i++) {
 				let pItem = particles[i]
 				pItem.gr.y += speed
-				pItem.gr.scale.y = 40
-				pItem.gr.scale.x = .02
+
+				if (speed >= 20) {
+					pItem.gr.scale.y = 40
+					pItem.gr.scale.x = 0.03
+				}
 
 				if (pItem.gr.y > window.innerHeight) {
 					pItem.gr.y = 0
@@ -125,6 +130,18 @@ class BrakeBanner {
 		function start() {
 			speed = 0
 			gsap.ticker.add(loop)
+		}
+
+		function pause() {
+			gsap.ticker.remove(loop)
+
+			for (let i = 0; particles.length; i++) {
+				let pItem = particles[i]
+				pItem.gr.scale.y = 1
+				pItem.gr.scale.x = 1
+
+				gsap.to(pItem.gr, { duration: .6, x: pItem.sx, y: pItem.sy, ease: "elastic.out" })
+			}
 		}
 
 
