@@ -14,6 +14,8 @@ class BrakeBanner {
 		this.loader = new PIXI.Loader();
 		this.loader.add('btn.png', 'images/btn.png');
 		this.loader.add('btn_circle.png', 'images/btn_circle.png');
+		this.loader.add('brake_bike.png', 'images/brake_bike.png');
+		this.loader.add('brake_handlerbar.png', 'images/brake_handlerbar.png');
 		this.loader.load();
 
 		this.stage = this.app.stage
@@ -25,10 +27,23 @@ class BrakeBanner {
 	show() {
 		let actionButton = this.createActionButton()
 		actionButton.x = actionButton.y = 200;
+
+		// 创建自行车图层
+		const bikeContainer = new PIXI.Container();
+		this.stage.addChild(bikeContainer);
+
+		bikeContainer.scale.x = bikeContainer.scale.y = 0.1
+
+		const brakeBikeImage = new PIXI.Sprite(this.loader.resources['brake_bike.png'].texture);
+		const brakeHandlerbarImage = new PIXI.Sprite(this.loader.resources['brake_handlerbar.png'].texture);
+
+		bikeContainer.addChild(brakeBikeImage);
+		bikeContainer.addChild(brakeHandlerbarImage);
+
 	}
 	createActionButton() {
 		// 创建按钮图层
-		let actionButton = new PIXI.Container();
+		const actionButton = new PIXI.Container();
 		this.stage.addChild(actionButton);
 		let btnImage = new PIXI.Sprite(this.loader.resources['btn.png'].texture);
 		let btnCircleImage = new PIXI.Sprite(this.loader.resources['btn_circle.png'].texture);
