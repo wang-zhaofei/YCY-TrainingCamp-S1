@@ -45,6 +45,9 @@ class BrakeBanner {
 		btnCircleImage2.pivot.y = btnCircleImageWidth2 / 2
 		actionButton.x = actionButton.y = 200;
 
-		// 
+		// 使用gsap实现动画效果
+		btnCircleImage.scale.x = btnCircleImage.scale.y = 0.8
+		gsap.to(btnCircleImage.scale, { duration: 1, x: 1.2, y: 1.2, repeat: -1 })
+		gsap.to(btnCircleImage.scale, { duration: 1, alpha: 0, repeat: -1 })
 	}
 }
