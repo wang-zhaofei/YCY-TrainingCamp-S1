@@ -23,6 +23,11 @@ class BrakeBanner {
 		});
 	}
 	show() {
+		let actionButton = this.createActionButton()
+		actionButton.x = actionButton.y = 200;
+	}
+	createActionButton() {
+		// 创建按钮图层
 		let actionButton = new PIXI.Container();
 		this.stage.addChild(actionButton);
 		let btnImage = new PIXI.Sprite(this.loader.resources['btn.png'].texture);
@@ -43,11 +48,12 @@ class BrakeBanner {
 		const btnCircleImageWidth2 = btnCircleImage2.width
 		btnCircleImage2.pivot.x = btnCircleImageWidth2 / 2
 		btnCircleImage2.pivot.y = btnCircleImageWidth2 / 2
-		actionButton.x = actionButton.y = 200;
+
 
 		// 使用gsap实现动画效果
 		btnCircleImage.scale.x = btnCircleImage.scale.y = 0.8
 		gsap.to(btnCircleImage.scale, { duration: 1, x: 1.2, y: 1.2, repeat: -1 })
 		gsap.to(btnCircleImage.scale, { duration: 1, alpha: 0, repeat: -1 })
+		return actionButton
 	}
 }
