@@ -16,6 +16,7 @@ class BrakeBanner {
 		this.loader.add('btn_circle.png', 'images/btn_circle.png');
 		this.loader.add('brake_bike.png', 'images/brake_bike.png');
 		this.loader.add('brake_handlerbar.png', 'images/brake_handlerbar.png');
+		this.loader.add('brake_lever.png', 'images/brake_lever.png');
 		this.loader.load();
 
 		this.stage = this.app.stage
@@ -25,20 +26,31 @@ class BrakeBanner {
 		});
 	}
 	show() {
-		let actionButton = this.createActionButton()
-		actionButton.x = actionButton.y = 200;
+
 
 		// 创建自行车图层
 		const bikeContainer = new PIXI.Container();
 		this.stage.addChild(bikeContainer);
 
-		bikeContainer.scale.x = bikeContainer.scale.y = 0.1
+		bikeContainer.scale.x = bikeContainer.scale.y = 0.3
 
 		const brakeBikeImage = new PIXI.Sprite(this.loader.resources['brake_bike.png'].texture);
+		const brakeLeverImage = new PIXI.Sprite(this.loader.resources['brake_lever.png'].texture);
 		const brakeHandlerbarImage = new PIXI.Sprite(this.loader.resources['brake_handlerbar.png'].texture);
 
 		bikeContainer.addChild(brakeBikeImage);
+		bikeContainer.addChild(brakeLeverImage);
 		bikeContainer.addChild(brakeHandlerbarImage);
+
+		// 调整车闸的位置
+		brakeLeverImage.pivot.x = 455
+		brakeLeverImage.pivot.y = 455
+		brakeLeverImage.x = 722
+		brakeLeverImage.y = 900
+
+		// 按钮图层
+		let actionButton = this.createActionButton()
+		actionButton.x = actionButton.y = 400;
 
 	}
 	createActionButton() {
