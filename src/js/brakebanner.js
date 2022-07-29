@@ -22,6 +22,8 @@ class BrakeBanner {
 		});
 	}
 	show() {
+		let actionButton = new PIXI.Container();
+		this.stage.addChild(actionButton);
 		const btnImage = new PIXI.Sprite(this.loader.resources['btn.png'].texture);
 		this.stage.addChild(btnImage);
 	}
