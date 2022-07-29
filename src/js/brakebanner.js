@@ -112,17 +112,18 @@ class BrakeBanner {
 			speed += .5
 			speed = Math.min(speed, 20)
 
-			for (let i = 0; particles.length; i++) {
-				let pItem = particles[i]
-				pItem.gr.y += speed
+			for (let i = 0; i < particles.length - 1; i++) {
+				let pItem = particles[i];
+
+				pItem.gr.y += speed;
 
 				if (speed >= 20) {
-					pItem.gr.scale.y = 40
-					pItem.gr.scale.x = 0.03
+					pItem.gr.scale.y = 40;
+					pItem.gr.scale.x = 0.03;
 				}
 
 				if (pItem.gr.y > window.innerHeight) {
-					pItem.gr.y = 0
+					pItem.gr.y = 0;
 				}
 			}
 		}
@@ -135,7 +136,7 @@ class BrakeBanner {
 		function pause() {
 			gsap.ticker.remove(loop)
 
-			for (let i = 0; particles.length; i++) {
+			for (let i = 0; i < particles.length - 1; i++) {
 				let pItem = particles[i]
 				pItem.gr.scale.y = 1
 				pItem.gr.scale.x = 1
