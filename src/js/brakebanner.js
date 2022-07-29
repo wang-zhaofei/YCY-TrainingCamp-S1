@@ -52,6 +52,17 @@ class BrakeBanner {
 		let actionButton = this.createActionButton()
 		actionButton.x = actionButton.y = 400;
 
+		// 按钮与车闸的交互
+		actionButton.interactive = true
+		actionButton.buttonMode = true
+		actionButton.on("mousedown", () => {
+			// brakeLeverImage.rotation = Math.PI / 180 * -30
+			gsap.to(brakeLeverImage, { duration: .8, rotation: Math.PI / 180 * -30 })
+		})
+		actionButton.on("mouseup", () => {
+			gsap.to(brakeLeverImage, { duration: .6, rotation: 0 })
+		})
+
 	}
 	createActionButton() {
 		// 创建按钮图层
