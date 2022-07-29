@@ -16,8 +16,11 @@ class BrakeBanner {
 		this.loader.load();
 
 		this.loader.onComplete.add(() => {
-			const btnImage = new PIXI.Sprite(this.loader.resources['btn.png'].texture);
-			this.app.stage.addChild(btnImage);
+			this.show()
 		});
+	}
+	show() {
+		const btnImage = new PIXI.Sprite(this.loader.resources['btn.png'].texture);
+		this.app.stage.addChild(btnImage);
 	}
 }
