@@ -81,7 +81,7 @@ class BrakeBanner {
 
 		// 创建粒子
 		let particles = []
-		let colors = [0xf1cf54, 0xb5cea8, 0x333333] // 多颜色
+		let colors = [0xf1cf54, 0xb5cea8] // 多颜色
 
 		for (let i = 0; i < 10; i++) {
 			let gr = new PIXI.Graphics();
@@ -104,10 +104,17 @@ class BrakeBanner {
 
 		}
 
+		let speed = 10
 		function loop() {
+
+			speed += .5
+			speed = Math.min(speed, 30)
+
 			for (let i = 0; particles.length; i++) {
 				let pItem = particles[i]
-				pItem.gr.y += 20
+				pItem.gr.y += speed
+				pItem.gr.scale.y = 40
+				pItem.gr.scale.x = .02
 
 				if (pItem.gr.y > window.innerHeight) {
 					pItem.gr.y = 0
@@ -115,7 +122,14 @@ class BrakeBanner {
 			}
 		}
 
-		gsap.ticker.add(loop)
+		function start() {
+			speed = 0
+			gsap.ticker.add(loop)
+		}
+
+
+
+		start()
 
 
 		// 一直移动，超出边界回到顶部，按住鼠标停止回弹效果，松开继续
