@@ -26,8 +26,6 @@ class BrakeBanner {
 		});
 	}
 	show() {
-
-
 		// 创建自行车图层
 		const bikeContainer = new PIXI.Container();
 		this.stage.addChild(bikeContainer);
@@ -69,6 +67,60 @@ class BrakeBanner {
 		}
 		window.addEventListener('resize', resize)
 		resize()
+
+		// 实现骑行效果
+		let particlesContainer = new PIXI.Container();
+		this.stage.addChild(particlesContainer);
+
+		particlesContainer.pivot.x = window.innerWidth / 2
+		particlesContainer.pivot.y = window.innerHeight / 2
+		particlesContainer.x = window.innerWidth / 2
+		particlesContainer.y = window.innerHeight / 2
+
+		particlesContainer.rotation = 38 * Math.PI / 180
+
+		// 创建粒子
+		let particles = []
+		let colors = [0xf1cf54, 0xb5cea8, 0x333333] // 多颜色
+
+		for (let i = 0; i < 10; i++) {
+			let gr = new PIXI.Graphics();
+			gr.beginFill(colors[Math.floor(Math.random() * colors.length)]);
+			gr.drawCircle(0, 0, 6);
+			gr.endFill();
+
+			// 随机分布
+			let parItem = {
+				sx: Math.random() * window.innerWidth,
+				sy: Math.random() * window.innerHeight,
+				gr: gr
+			}
+
+			gr.x = parItem.sx;
+			gr.y = parItem.sy;
+
+			particlesContainer.addChild(gr);
+			particles.push(parItem)
+
+		}
+
+		function loop() {
+			for (let i = 0; particles.length; i++) {
+				let pItem = particles[i]
+				pItem.gr.y += 20
+
+				if (pItem.gr.y > window.innerHeight) {
+					pItem.gr.y = 0
+				}
+			}
+		}
+
+		gsap.ticker.add(loop)
+
+
+		// 一直移动，超出边界回到顶部，按住鼠标停止回弹效果，松开继续
+
+
 
 	}
 	createActionButton() {
